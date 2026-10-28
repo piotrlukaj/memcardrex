@@ -504,7 +504,7 @@ namespace MemcardRex
             dlg.CanChooseFiles = true;
             dlg.Title = "Import save";
             dlg.CanChooseDirectories = false;
-            dlg.AllowedFileTypes = memCard.SupportedSingleSaveExtensions;
+            //No type filter, RAW saves have no extension (format is detected from the content)
 
             if(dlg.RunModal() == 1)
             {
@@ -517,7 +517,16 @@ namespace MemcardRex
                 }
                 else
                 {
-                    Console.WriteLine("Failed to import");
+                    var alert = new NSAlert()
+                    {
+                        AlertStyle = NSAlertStyle.Warning,
+                        MessageText = "Unable to import save",
+                        InformativeText = requiredSlots > 0
+                            ? "To complete this operation " + requiredSlots + " free slots are required."
+                            : "The file is not a supported single save."
+                    };
+
+                    alert.RunModal();
                 }
             }
         }

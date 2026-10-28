@@ -68,6 +68,20 @@ namespace MemcardRex
             window.EditSaveComment(sender);
         }
 
+        [Export("importSaveToolbar:")]
+        void ImportSaveToolbar(NSObject sender)
+        {
+            var window = NSApplication.SharedApplication.KeyWindow.ContentViewController as ViewController;
+            window.ImportSave(sender);
+        }
+
+        [Export("exportSaveToolbar:")]
+        void ExportSaveToolbar(NSObject sender)
+        {
+            var window = NSApplication.SharedApplication.KeyWindow.ContentViewController as ViewController;
+            window.ExportSave(sender);
+        }
+
         [Export("openDocToolbar:")]
         void OpenDocToolbar(NSObject sender)
         {
